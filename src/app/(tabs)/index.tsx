@@ -1,10 +1,16 @@
 import { Link } from "expo-router";
-import { Text } from "react-native";
+import { Image, Text, View } from "react-native";
+import posts from "~/assets/data/posts.json";
+
+const post1 = posts[0];
 
 export default function FeedScreen() {
   return (
-    <Text className="text-3xl font-bold text-blue-500">
-      This is a demo app for the Expo Router library. You can find the source code for this app at.
-    </Text>
+    <View>
+      <View>
+        <Image source={{ uri: post1.user.image_url }} className="w-24 aspect-square" />
+      </View>
+      <Image source={{ uri: post1.image_url }} className="w-full aspect-[4/3]" />
+    </View>
   );
 }
