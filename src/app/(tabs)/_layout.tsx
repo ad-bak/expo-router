@@ -1,5 +1,4 @@
-import { Link, Slot, Stack, Tabs } from "expo-router";
-import { Text, View } from "react-native";
+import { Tabs } from "expo-router";
 import { FontAwesome } from "@expo/vector-icons";
 
 export default function TabsLayout() {

@@ -1,5 +1,6 @@
-import { Link, Slot, Stack, Tabs } from "expo-router";
-import { Text, View } from "react-native";
+import { Stack } from "expo-router";
+
+import "../../global.css";
 
 export default function RootLayout() {
   return (
