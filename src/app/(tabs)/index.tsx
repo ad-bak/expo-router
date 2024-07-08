@@ -9,7 +9,7 @@ export default function FeedScreen() {
       data={posts}
       renderItem={({ item }) => <PostListItem post={item} />}
       keyExtractor={(item) => item.id}
-      contentContainerStyle={{ gap: 1 }}
+      contentContainerStyle={{ gap: 1, maxWidth: 512, width: "100%", alignSelf: "center" }}
       showsVerticalScrollIndicator={false}
     />
   );
