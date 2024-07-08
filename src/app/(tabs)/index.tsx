@@ -1,12 +1,16 @@
-import { Link } from "expo-router";
-import { Image, Text, View } from "react-native";
-import { AntDesign, Feather, Ionicons } from "@expo/vector-icons";
+import { FlatList } from "react-native";
 
 import posts from "~/assets/data/posts.json";
 import PostListItem from "~/src/components/PostListItem";
 
-const post1 = posts[0];
-
 export default function FeedScreen() {
-  return <PostListItem post={post1} />;
+  return (
+    <FlatList
+      data={posts}
+      renderItem={({ item }) => <PostListItem post={item} />}
+      keyExtractor={(item) => item.id}
+      contentContainerStyle={{ gap: 1 }}
+      showsVerticalScrollIndicator={false}
+    />
+  );
 }
