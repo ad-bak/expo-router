@@ -1,10 +1,17 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Image, Pressable, Text, TextInput, View } from "react-native";
 import * as ImagePicker from "expo-image-picker";
+import { FontAwesome } from "@expo/vector-icons";
 
 export default function New() {
   const [caption, setCaption] = useState("");
   const [image, setImage] = useState("");
+
+  useEffect(() => {
+    if (!image) {
+      pickImage();
+    }
+  }, []);
 
   const pickImage = async () => {
     let result = await ImagePicker.launchImageLibraryAsync({
@@ -21,14 +28,30 @@ export default function New() {
 
   return (
     <View className="p-3 items-center flex-1">
-      <Image
-        source={{ uri: "https://notjustdev-dummy.s3.us-east-2.amazonaws.com/images/1.jpg" }}
-        className="w-52 aspect-[3/4] rounded-lg "
-      />
+      {image === "" && (
+        <>
+          <View className="bg-gray-200 w-full h-96 rounded-md">
+            <FontAwesome name="image" color={"#1877f2"} className="text-gray-500 m-auto" size={300} />
+          </View>
 
-      <Text onPress={pickImage} className="text-blue-500 font-semibold m-5">
-        Change
-      </Text>
+          <Text onPress={pickImage} className="text-blue-500 font-semibold">
+            Add a photo
+          </Text>
+        </>
+      )}
+      {image !== "" && <Image source={{ uri: image }} style={{ width: 200, height: 200 }} />}
+
+      {image !== "" && (
+        <Text onPress={() => setImage("")} className="text-red-500 font-semibold">
+          Remove
+        </Text>
+      )}
+
+      {image !== "" && (
+        <Text onPress={pickImage} className="text-blue-500 font-semibold m-5">
+          Change
+        </Text>
+      )}
 
       <TextInput
         placeholder="Caption"
