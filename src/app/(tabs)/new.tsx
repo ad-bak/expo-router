@@ -1,8 +1,24 @@
 import { useState } from "react";
 import { Image, Pressable, Text, TextInput, View } from "react-native";
+import * as ImagePicker from "expo-image-picker";
 
 export default function New() {
   const [caption, setCaption] = useState("");
+  const [image, setImage] = useState("");
+
+  const pickImage = async () => {
+    let result = await ImagePicker.launchImageLibraryAsync({
+      mediaTypes: ImagePicker.MediaTypeOptions.Images,
+      allowsEditing: true,
+      aspect: [4, 3],
+      quality: 1,
+    });
+
+    if (!result.canceled) {
+      setImage(result.assets[0].uri);
+    }
+  };
+
   return (
     <View className="p-3 items-center flex-1">
       <Image
@@ -10,7 +26,7 @@ export default function New() {
         className="w-52 aspect-[3/4] rounded-lg "
       />
 
-      <Text onPress={() => {}} className="text-blue-500 font-semibold m-5">
+      <Text onPress={pickImage} className="text-blue-500 font-semibold m-5">
         Change
       </Text>
 
